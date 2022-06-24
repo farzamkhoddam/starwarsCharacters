@@ -7,12 +7,17 @@ interface Props {
 }
 const Project: React.FC<Props> = ({ project }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+
   const bounding = containerRef.current?.getBoundingClientRect();
-  console.log("farzam distance from top===", bounding && bounding?.top);
+  if (project.title === "Luke Skywalker")
+    console.log(
+      "farzam distance from top===",
+      bounding && bounding?.bottom - window.innerHeight
+    );
 
   // const bounding =
   return (
-    <Container top={bounding?.top} id="container" ref={containerRef}>
+    <Container top={bounding?.bottom} id="container" ref={containerRef}>
       <ColoredWall color={project.color} />
       <Image src={project.url} alt={project.title} />
       <Title>{project.title}</Title>
@@ -30,7 +35,7 @@ const Container = styled.div<{ top: number | undefined }>`
   position: relative;
   opacity: 0;
   ${({ top }) =>
-    ((top && top - window.innerHeight <= -20) || top === undefined) &&
+    ((top && top - window.innerHeight <= 400) || top === undefined) &&
     css`
       animation: ${arrival} 0.6s ease;
       opacity: 1;

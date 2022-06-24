@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import styled, { keyframes } from "styled-components/macro";
+import { scrollHandler } from "./utils";
 import { ProjectType } from "./interace";
 import darthVader from "./images/darthVader.jpeg";
 import obiWan from ".//images/obiWan.jpeg";
@@ -14,6 +15,8 @@ import rey from "./images/rey.jpeg";
 import Project from "./Project";
 
 function App() {
+  const [scroll, setScroll] = useState<number>(0);
+  console.log(scroll);
   const projects: ProjectType[] = [
     {
       url: darthVader,
@@ -62,9 +65,9 @@ function App() {
     },
   ];
   useEffect(() => {
-    window.addEventListener("scroll", () => console.log("inja"));
+    window.addEventListener("scroll", () => scrollHandler(setScroll));
     return () => {
-      window.removeEventListener("scroll", () => console.log("inja"));
+      window.removeEventListener("scroll", () => scrollHandler(setScroll));
     };
   }, []);
   return (
