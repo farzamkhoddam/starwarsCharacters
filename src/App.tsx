@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import styled, { css, keyframes } from "styled-components/macro";
-import { scrollHandler } from "./utils";
+import styled, { keyframes } from "styled-components/macro";
 import { ProjectType } from "./interace";
 import darthVader from "./images/darthVader.jpeg";
 import obiWan from ".//images/obiWan.jpeg";
@@ -13,12 +12,8 @@ import yoda from "./images/yoda.jpg";
 import QuiGonJinn from "./images/QuiGonJinn.jpg";
 import rey from "./images/rey.jpeg";
 import Project from "./Project";
-import { arrival } from "./styles";
 
 function App() {
-  const arrow = document.querySelector("#arrow");
-  const bounding = arrow?.getBoundingClientRect();
-  const [scroll, setScroll] = useState<number>(0);
   const projects: ProjectType[] = [
     {
       url: darthVader,
@@ -67,9 +62,9 @@ function App() {
     },
   ];
   useEffect(() => {
-    window.addEventListener("scroll", () => scrollHandler(setScroll));
+    window.addEventListener("scroll", () => console.log("inja"));
     return () => {
-      window.removeEventListener("scroll", () => scrollHandler(setScroll));
+      window.removeEventListener("scroll", () => console.log("inja"));
     };
   }, []);
   return (
@@ -150,7 +145,6 @@ const Title = styled.h1`
     font-size: 134%;
   }
 `;
-const Paragraph = styled.p``;
 const LightSaber = styled.div`
   position: relative;
   display: flex;
@@ -186,28 +180,7 @@ const LightSaber = styled.div`
     margin: 0 auto;
   }
 `;
-const Link = styled.h3`
-  text-decoration: none;
-  margin-top: 6rem;
-  color: white;
-  position: relative;
-  &:before {
-    content: "";
-    height: 2px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 0;
-    background-color: white;
-    transition: all 0.4s ease;
-  }
-  &:hover {
-    &:before {
-      width: 100%;
-      left: 0;
-    }
-  }
-`;
+
 const MyProjects = styled.div`
   margin-top: 6rem;
   display: flex;
